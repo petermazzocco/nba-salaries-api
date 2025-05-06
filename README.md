@@ -13,7 +13,7 @@ This project scrapes and stores NBA salary data in a PostgreSQL database and exp
 
 The API is available at:
 ```
-[https://nba-salaries-api.traefik.me/](https://nba-salaries-api.traefik.me/)
+https://nba-salaries-api.traefik.me/
 ```
 
 ## API Endpoints
