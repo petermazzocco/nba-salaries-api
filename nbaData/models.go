@@ -9,21 +9,21 @@ import (
 )
 
 type NbaPlayerSalary struct {
-	ID         int64
-	Name       string
-	Salary2025 pgtype.Text
-	Salary2026 pgtype.Text
-	Salary2027 pgtype.Text
-	Salary2028 pgtype.Text
-	Salary2029 pgtype.Text
+	ID         int64		`json:"id"`
+	Name       string 		`json:"name"`
+	Salary2025 pgtype.Text	`json:"salary2025"`
+	Salary2026 pgtype.Text	`json:"salary2026"`
+	Salary2027 pgtype.Text	`json:"salary2027"`
+	Salary2028 pgtype.Text	`json:"salary2028"`
+	Salary2029 pgtype.Text	`json:"salary2029"`
 }
 
 type NbaTeamSalary struct {
-	ID         int64
-	Name       string
-	Salary2025 pgtype.Text
-	Salary2026 pgtype.Text
-	Salary2027 pgtype.Text
-	Salary2028 pgtype.Text
-	Salary2029 pgtype.Text
+	ID         int64 		`json:"id"`
+	Name       string 		`json:"name"`
+	Salary2025 pgtype.Text 	`json:"salary2025"`
+	Salary2026 pgtype.Text 	`json:"salary2026"`
+	Salary2027 pgtype.Text 	`json:"salary2027"`
+	Salary2028 pgtype.Text 	`json:"salary2028"`
+	Salary2029 pgtype.Text 	`json:"salary2029"`
 }
