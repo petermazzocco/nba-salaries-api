@@ -7,11 +7,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/go-chi/httprate"
 	"github.com/jackc/pgx/v5"
 	"github.com/joho/godotenv"
 	"github.com/petermazzocco/nba-salaries/nbaData"
@@ -26,15 +24,16 @@ func writeFormattedJSON(v any) (string, error) {
 	return string(json), nil
 }
 
-func main() {
+func init() {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("Could not find local .env file, continuing with environment variables")
 	}
+}
 
+func main() {
 	// Set up context with timeout for the entire operation
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
-	defer cancel()
+	ctx := context.Background()
 
 	// Database connection
 	url := os.Getenv("DB_URL")
@@ -53,15 +52,6 @@ func main() {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.RequestID)
-
-	// Rate limiting
-	r.Use(httprate.Limit(
-		5,
-		time.Minute,
-		httprate.WithLimitHandler(func(w http.ResponseWriter, r *http.Request) {
-			http.Error(w, `{"error": "Rate-limited. Max request 5 per minute. Please, slow down."}`, http.StatusTooManyRequests)
-		}),
-	))
 
 	// API Routes
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
